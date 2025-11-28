@@ -1,6 +1,6 @@
-import "./Cartas.css";
+import ".Cartas.css";
 type Props = {
-    numero: string;
+    numero: number;
     nombre: string;
     tipo: string;
     ataque?: number;
@@ -12,11 +12,11 @@ type Props = {
 function Cartas ({
     ataque = 0,
     defensa = 0,
-    descripcion = "Sin descripción",
+    descripcion = "Hola",
     imagen,
-    nombre = "Sin nombre",
-    numero = "000",
-    tipo = "Desconocido",
+    nombre = "pikachu",
+    numero = 1,
+    tipo = "electrico",
 }: Props) {
     return (
         <div>
