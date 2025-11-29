@@ -27,7 +27,7 @@ function VistaMazo() {
                  edad={16}
                  nombre="Abbey"
                  padres="El Yeti"
-                 habilidad="Manipulación de hielo"
+                 habilidad="Control del hielo"
                  imagen="https://tse3.mm.bing.net/th/id/OIP.eJisJUinMbmHTK3EQjMFegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
                  especie='Yeti'
                />
@@ -36,7 +36,7 @@ function VistaMazo() {
                  apellido=""
                  edad={16}
                  nombre="Operetta"
-                 padres="El Fantasma de la Ópera"
+                 padres="Fantasma de la Ópera"
                  habilidad="Canto hipnótico"
                  imagen="https://w0.peakpx.com/wallpaper/163/754/HD-wallpaper-monster-high-monster-high-scaritage-operetta-doll-anime.jpg"
                  especie='Fantasma'

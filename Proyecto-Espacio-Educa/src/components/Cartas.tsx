@@ -36,6 +36,7 @@ function Cartas ({
             <h3>
                 {nombre} {apellido}
             </h3>
+            
             <img src={imagen} alt={nombre} />
             <div className="card-body">
                 <div>
