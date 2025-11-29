@@ -1,29 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-.card {
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 12px;
-	width: 220px;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-	cursor: pointer;
-	background: white;
-	transition: transform 0.12s ease, box-shadow 0.12s ease;
+body {
+	background: url("https://th.bing.com/th/id/R.82e423c2c1ec50d42e143e77242aa9cd?rik=wpzXIYk2tUqMtw&riu=http%3a%2f%2f3.bp.blogspot.com%2f_v6JXDcDrhW0%2fTMg_xGIgciI%2fAAAAAAAAUqc%2fGZvo_lkjTIY%2fs1600%2f122.jpg&ehk=11ojXclfQy0XIYYxgX%2bsgp25gnqw2DCSNQtB0CZUlTE%3d&risl=&pid=ImgRaw&r=0");
+	background-size: cover;
+	font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	color: #ffffff;
 }
 
-.card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+
+
+.card {
+	background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06));
+	border-radius: 14px;
+	padding: 14px;
+	width: 300px; /* slightly smaller width */
+	height: 440px; /* slightly reduced height */
+	box-shadow: 0 10px 30px rgba(0,0,0,0.65);
+	cursor: pointer;
+	transition: transform 0.14s ease, box-shadow 0.14s ease;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid rgba(255,255,255,0.08);
+	display: flex;
+	flex-direction: column;
+}
+
+.card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, rgba(255,45,149,0.04), rgba(155,89,255,0.03));
+	pointer-events: none;
+}
+
+.card h3, .card p {
+	position: relative;
+	z-index: 1;
+	color: #ffffff;
+	margin: 6px 0;
 }
 
 .card img {
 	width: 100%;
-	height: auto;
+	height: 280px; /* increased image height */
 	display: block;
-	margin: 8px 0;
+	margin: 10px 0;
+	border-radius: 10px;
+	z-index: 1;
+	object-fit: cover; /* keep images filling same area */
+}
+
+.card-body {
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1; /* take remaining vertical space */
+}
+
+.card h3 {
+	font-size: 1.6rem; /* más grande */
+	margin: 4px 0;
+	font-weight: 600;
+}
+
+.card:hover {
+	transform: translateY(-8px) scale(1.02);
+	box-shadow: 0 18px 40px rgba(0,0,0,0.7), 0 0 18px rgba(255,45,149,0.06);
+	border-image: var(--mh-card-border) 1;
+	border-style: solid;
 }
 
 .card-large {
-	width: 420px;
-	padding: 18px;
+	width: 600px; /* adjusted modal / featured card */
+	height: 820px;
+	padding: 20px;
+}
+
+/* Gothic decorative frame for cards */
+.card {
+	background-clip: padding-box;
+	border-radius: 14px;
+}
+
+.card::after {
+	/* ornate frame edge using conic gradient as border image effect */
+	content: '';
+	position: absolute;
+	inset: 6px;
+	pointer-events: none;
+	border-radius: 10px;
+	padding: 6px;
+	background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.18));
+	box-shadow: inset 0 0 0 3px rgba(0,0,0,0.35), 0 6px 22px rgba(0,0,0,0.6);
+	mix-blend-mode: multiply;
+}
+
+/* decorative corner flourishes */
+.card::before {
+	content: '';
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	left: -10px;
+	top: -10px;
+	background: radial-gradient(circle at 30% 30%, var(--mh-accent), transparent 40%);
+	transform: rotate(45deg);
+	opacity: 0.9;
+}
+
+.card .flourish {
+	width: 100%;
+	height: 6px;
+	background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+	border-radius: 6px;
+	margin-top: 6px;
+}
+
+.card h3 {
+	font-family: 'Poppins', 'UnifrakturCook', sans-serif;
+	letter-spacing: 0.2px;
+}
+
+/* Atributos con iconos */
+.card p.attr {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.95rem;
+	color: rgba(255,255,255,0.95);
+}
+
+.card p.attr::before {
+	display: inline-block;
+	width: 20px;
+	text-align: center;
+	margin-right: 6px;
+	font-size: 1.05rem;
+	opacity: 0.95;
+}
+
+.card p.attr.especie::before { content: "🐾"; }
+.card p.attr.edad::before { content: "🎂"; }
+.card p.attr.padres::before { content: "👪"; }
+.card p.attr.habilidad::before { content: "⚡"; }
+
+.card p.attr span {
+	font-weight: 500;
+	color: rgba(255,255,255,0.95);
+}
+
+/* Operetta specific image adjustment: shift crop upward and trim bottom */
+.card.operetta img {
+	object-position: 50% 12%; /* center horizontally, move focus toward top */
+}
+
+.card .accent {
+	display: inline-block;
+	height: 6px;
+	width: 60px;
+	background: var(--mh-accent);
+	border-radius: 4px;
+	margin-top: 6px;
+	z-index: 1;
 }
 

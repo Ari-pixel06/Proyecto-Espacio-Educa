@@ -1,70 +1,48 @@
-import { useEffect, useState } from 'react';
 import Carta from '../components/Cartas';
-import CardDetail from '../components/card';
 import './VistaMazo.css';
 
-type CardData = {
-    numero: number;
-    nombre: string;
-    tipo: string;
-    ataque: number;
-    defensa: number;
-    descripcion: string;
-    imagen: string;
-};
-
 function VistaMazo() {
-    const cards: CardData[] = [
-        {
-            numero: 1,
-            nombre: 'Bulbasaur',
-            tipo: 'Planta',
-            ataque: 70,
-            defensa: 65,
-            descripcion: 'Un Pokémon de tipo planta.',
-            imagen: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
-        },
-        {
-            numero: 7,
-            nombre: 'Squirtle',
-            tipo: 'Agua',
-            ataque: 60,
-            defensa: 70,
-            descripcion: 'Un Pokémon de tipo agua.',
-            imagen: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
-        }
-    ];
-
-    const [selected, setSelected] = useState<CardData | null>(null);
-
-    useEffect(() => {
-        function onKey(e: KeyboardEvent) {
-            if (e.key === 'Escape') setSelected(null);
-        }
-        window.addEventListener('keydown', onKey);
-        return () => window.removeEventListener('keydown', onKey);
-    }, []);
-
     return (
         <div className="vista-mazo-root">
-            <div className="cards-row">
-                {cards.map((c) => (
-                    <Carta
-                        key={c.numero + c.nombre}
-                        {...c}
-                        onClick={() => setSelected(c)}
-                    />
-                ))}
-            </div>
+      <header className="mh-header">
+        <div className="mh-logo-wrap">
+          <div className="mh-logo-img" aria-hidden>💀</div>
+          <h1 className="mh-title">Cartas Monster High</h1>
+        </div>
 
-            {selected && (
-                <div className="overlay" onClick={() => setSelected(null)}>
-                    <div className="modal" onClick={(e) => e.stopPropagation()}>
-                        <CardDetail {...selected} />
-                        <button className="close-btn" onClick={() => setSelected(null)}>Cerrar</button>
-                    </div>
-                </div>
-            )}
+      </header>
+            <div className="cards-row">
+               <Carta
+                 apellido="de Nile"
+                 edad={5842}
+                 nombre="Cleo"
+                 padres="La momia"
+                 habilidad="Magia Egipcia"
+                 imagen="https://th.bing.com/th/id/R.7cf6b8d21ef735c84d5685a8c6a7b63e?rik=T9bgC%2f8e%2fTCWFA&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f28800000%2fCleo-De-Nile-monster-high-28820550-704-1082.jpg&ehk=f%2bmqWFqARVXyEkiKlwt4%2fUODiCe0Hto7ergqJ66F7XA%3d&risl=&pid=ImgRaw&r=0"
+                 especie='Momia'
+               />
+
+               <Carta
+                 apellido="Bominable"
+                 edad={16}
+                 nombre="Abbey"
+                 padres="El Yeti"
+                 habilidad="Manipulación de hielo"
+                 imagen="https://tse3.mm.bing.net/th/id/OIP.eJisJUinMbmHTK3EQjMFegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+                 especie='Yeti'
+               />
+
+               <Carta
+                 apellido=""
+                 edad={16}
+                 nombre="Operetta"
+                 padres="El Fantasma de la Ópera"
+                 habilidad="Canto hipnótico"
+                 imagen="https://w0.peakpx.com/wallpaper/163/754/HD-wallpaper-monster-high-monster-high-scaritage-operetta-doll-anime.jpg"
+                 especie='Fantasma'
+                 className="operetta"
+               />
+            </div>
         </div>
     );
 }

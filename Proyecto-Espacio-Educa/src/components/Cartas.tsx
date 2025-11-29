@@ -1,12 +1,12 @@
 import "./Cartas.css";
 
 type Props = {
-    numero: number;
+    apellido: string;
     nombre: string;
-    tipo: string;
-    ataque?: number;
-    defensa?: number;
-    descripcion: string;
+    edad: number;
+    padres: string;
+    habilidad: string;
+    especie: string;
     imagen: string;
     onClick?: () => void;
     className?: string;
@@ -14,13 +14,13 @@ type Props = {
 };
 
 function Cartas ({
-    ataque = 0,
-    defensa = 0,
-    descripcion = "Hola",
+    apellido = "de Nile",
+    edad = 1,
+    padres = "Hola",
     imagen,
     nombre = "pikachu",
-    numero = 1,
-    tipo = "electrico",
+    habilidad = "electricidad",
+    especie = "electrico",
     onClick,
     className,
     large = false,
@@ -34,13 +34,19 @@ function Cartas ({
             onKeyDown={(e) => { if (onClick && (e.key === 'Enter' || e.key === ' ')) onClick(); }}
         >
             <h3>
-                {nombre} (#{numero})
+                {nombre} {apellido}
             </h3>
             <img src={imagen} alt={nombre} />
-            <p>Tipo: {tipo}</p>
-            <p>Ataque: {ataque}</p>
-            <p>Defensa: {defensa}</p>
-            <p>{descripcion}</p>
+            <div className="card-body">
+                <div>
+                    <p className="attr especie">Especie: <span>{especie}</span></p>
+                    <p className="attr edad">Edad: <span>{edad} años</span></p>
+                </div>
+                <div>
+                    <p className="attr padres">Padres: <span>{padres}</span></p>
+                    <p className="attr habilidad">Habilidad: <span>{habilidad}</span></p>
+                </div>
+            </div>
         </div>
     );
 }

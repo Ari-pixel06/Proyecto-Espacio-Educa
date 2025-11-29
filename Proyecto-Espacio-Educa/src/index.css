@@ -1,1 +1,93 @@
 @import "tailwindcss";
+
+:root {
+	--mh-bg1: #0b0226; /* deep indigo */
+	--mh-bg2: #2b0b2e; /* dark plum */
+	--mh-accent: #ff2d95; /* neon pink */
+	--mh-accent-2: #9b59ff; /* purple */
+	--mh-text: #f7f7fb; /* almost white */
+	--mh-muted: #c9bfe3;
+	--mh-card-bg: rgba(255,255,255,0.02);
+	--mh-card-border: linear-gradient(135deg,var(--mh-accent),var(--mh-accent-2));
+}
+
+html, body, #root {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: 'Poppins', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	/* Gothic background: layered gradients for depth + subtle diagonal texture */
+	background-color: #06010a;
+	background-image:
+		radial-gradient(circle at 10% 10%, rgba(155,89,255,0.03), transparent 10%),
+		radial-gradient(circle at 90% 90%, rgba(255,45,149,0.02), transparent 12%),
+		linear-gradient(180deg, rgba(11,2,38,0.9), rgba(42,10,40,0.95)),
+		repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0 1px, transparent 1px 6px);
+	color: var(--mh-text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: enable an image-based gothic background by adding the class
+	 `with-bg-image` to the <body>. Place a file at `public/gothic-bg.jpg` or
+	 change the URL below. This preserves the layered gradients as an overlay. */
+body.with-bg-image {
+	background-image: url('/gothic-bg.svg'),
+		radial-gradient(circle at 10% 10%, rgba(155,89,255,0.03), transparent 10%),
+		radial-gradient(circle at 90% 90%, rgba(255,45,149,0.02), transparent 12%),
+		linear-gradient(180deg, rgba(11,2,38,0.5), rgba(42,10,40,0.6));
+	background-size: cover, auto, auto, auto;
+	background-position: center, 10% 10%, 90% 90%, center;
+	background-attachment: fixed, scroll, scroll, scroll;
+}
+
+/* Heading styles using display font */
+h1, h2, h3 {
+	font-family: 'Creepster', 'UnifrakturCook', cursive;
+	letter-spacing: 0.6px;
+	color: var(--mh-text);
+	text-shadow: 0 2px 8px rgba(155,89,255,0.12), 0 0 12px rgba(255,45,149,0.06);
+}
+
+.mh-logo {
+	font-family: 'UnifrakturCook', 'Creepster', serif;
+	color: var(--mh-accent);
+	font-size: 1.6rem;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+/* Small decorative accent */
+.mh-badge {
+	background: linear-gradient(90deg,var(--mh-accent),var(--mh-accent-2));
+	color: white;
+	padding: 6px 10px;
+	border-radius: 999px;
+	font-weight: 700;
+	display: inline-block;
+}
+
+/* Gothic page vignette and subtle paper texture */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);
+	mix-blend-mode: multiply;
+}
+
+/* small repeating noise overlay to mimic paper/grain */
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background-image: linear-gradient(transparent 50%, rgba(0,0,0,0.01) 50%);
+	background-size: 3px 3px;
+	opacity: 0.35;
+}
+
+/* Make links and buttons inherit the theme */
+a, button { color: inherit; }
