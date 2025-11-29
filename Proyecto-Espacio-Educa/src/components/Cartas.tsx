@@ -1,4 +1,5 @@
-import ".Cartas.css";
+import "./Cartas.css";
+
 type Props = {
     numero: number;
     nombre: string;
@@ -7,6 +8,9 @@ type Props = {
     defensa?: number;
     descripcion: string;
     imagen: string;
+    onClick?: () => void;
+    className?: string;
+    large?: boolean;
 };
 
 function Cartas ({
@@ -17,9 +21,18 @@ function Cartas ({
     nombre = "pikachu",
     numero = 1,
     tipo = "electrico",
+    onClick,
+    className,
+    large = false,
 }: Props) {
     return (
-        <div>
+        <div
+            className={["card", large ? "card-large" : "", className || ""].join(" ")}
+            onClick={onClick}
+            role={onClick ? "button" : undefined}
+            tabIndex={onClick ? 0 : undefined}
+            onKeyDown={(e) => { if (onClick && (e.key === 'Enter' || e.key === ' ')) onClick(); }}
+        >
             <h3>
                 {nombre} (#{numero})
             </h3>
