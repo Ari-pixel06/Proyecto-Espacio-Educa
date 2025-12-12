@@ -3,6 +3,7 @@
 body {
 	background: url("https://th.bing.com/th/id/R.82e423c2c1ec50d42e143e77242aa9cd?rik=wpzXIYk2tUqMtw&riu=http%3a%2f%2f3.bp.blogspot.com%2f_v6JXDcDrhW0%2fTMg_xGIgciI%2fAAAAAAAAUqc%2fGZvo_lkjTIY%2fs1600%2f122.jpg&ehk=11ojXclfQy0XIYYxgX%2bsgp25gnqw2DCSNQtB0CZUlTE%3d&risl=&pid=ImgRaw&r=0");
 	background-size: cover;
+	background-repeat: no-repeat;
 	font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 	color: #ffffff;
 }

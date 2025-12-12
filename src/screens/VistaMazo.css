@@ -112,4 +112,158 @@
 	cursor: pointer;
 }
 
+/* Add card button (fixed bottom) */
+.add-card-btn {
+	display: inline-block;
+	margin: 28px auto 0 auto; /* aparecer al final del contenido, centrado */
+	background: linear-gradient(90deg, var(--mh-accent), var(--mh-accent-2));
+	color: white;
+	border: 2px solid rgba(255,255,255,0.12); /* contorno visible */
+	padding: 12px 18px;
+	border-radius: 999px;
+	font-weight: 600;
+	box-shadow: 0 8px 30px rgba(0,0,0,0.45), 0 0 14px rgba(255,255,255,0.04);
+	cursor: pointer;
+}
+
+/* Form inside modal */
+.card-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px 14px;
+}
+
+.card-form .form-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.card-form label {
+	font-size: 0.85rem;
+	color: rgba(255,255,255,0.85);
+	margin-bottom: 6px;
+}
+
+.card-form input,
+.card-form textarea {
+	padding: 8px 10px;
+	border-radius: 8px;
+	border: 1px solid rgba(255,255,255,0.06);
+	background: rgba(255,255,255,0.02);
+	color: #fff;
+}
+
+.card-form .form-row:nth-child(7),
+.card-form .form-row:nth-child(6) {
+	grid-column: 1 / -1; /* make species and image span full width */
+}
+
+/* View modal for a single card (image large + attrs) */
+.view-modal {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+	border-radius: 12px;
+	padding: 18px;
+	box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+	border: 2px solid transparent;
+	border-image: var(--mh-card-border) 1;
+	max-width: 960px;
+	width: calc(100% - 48px);
+	position: relative;
+}
+
+.view-content {
+	display: grid;
+	grid-template-columns: 360px 1fr; /* imagen fija a la izquierda, attrs a la derecha */
+	gap: 18px;
+	align-items: start;
+}
+
+.view-image img {
+	width: 360px; /* medida específica para imagen mediana */
+	height: 480px; /* altura fija para mantener consistencia */
+	border-radius: 8px;
+	display: block;
+	object-fit: cover;
+}
+
+.view-attrs {
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between; /* push button to bottom */
+	gap: 6px;
+	min-height: 480px; /* align height with image column on wide screens */
+}
+
+.view-attrs h3 {
+	margin-top: 0;
+}
+
+/* Atributos ordenados con iconos (reusar los iconos anteriores) */
+.view-attrs .attr {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 6px;
+	border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.view-attrs .attr::before {
+	display: inline-block;
+	width: 22px;
+	text-align: center;
+	font-size: 1.05rem;
+	opacity: 0.95;
+}
+
+.view-attrs .especie::before { content: "🐾"; }
+.view-attrs .edad::before { content: "🎂"; }
+.view-attrs .padres::before { content: "👪"; }
+.view-attrs .habilidad::before { content: "⭐"; color: #ffd700; }
+
+.view-attrs .attr span {
+	font-weight: 500;
+	color: rgba(255,255,255,0.95);
+}
+
+/* Close button specifically for the view modal: contorno y cerca de la imagen */
+.view-close-btn {
+	/* placed inside attributes column and pushed to bottom by flex */
+	position: static;
+	margin-top: 12px;
+	align-self: flex-start;
+	background: transparent;
+	color: #fff;
+	border: 2px solid rgba(255,255,255,0.14);
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	z-index: auto;
+}
+
+.view-close-btn:hover {
+	box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 12px rgba(255,255,255,0.06);
+}
+
+.view-close-btn:focus {
+	outline: 3px solid rgba(255,255,255,0.08);
+}
+
+/* Responsive: on small screens stack image on top and keep close button top-right */
+@media (max-width: 780px) {
+	.view-content { grid-template-columns: 1fr; }
+	.view-image img { width: 100%; height: auto; }
+	.view-close-btn { left: auto; right: 14px; align-self: center; }
+	.view-attrs { padding-top: 6px; min-height: auto; }
+}
+
+/* Focus/hover for add button */
+.add-card-btn:hover {
+	box-shadow: 0 10px 36px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.06);
+}
+
+.add-card-btn:focus {
+	outline: 3px solid rgba(255,255,255,0.08);
+}
+
 
