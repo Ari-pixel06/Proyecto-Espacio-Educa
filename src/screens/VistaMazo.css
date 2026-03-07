@@ -4,9 +4,9 @@
 	min-height: 100vh;
 	padding: 40px 24px;
 	display: flex;
-	flex-direction: column; /* apilar header encima de las cartas */
-	align-items: stretch; /* que el header ocupe todo el ancho */
-	justify-content: flex-start; /* empezar desde arriba */
+	flex-direction: column;
+	align-items: stretch; 
+	justify-content: flex-start; 
 	background-image: radial-gradient(circle at 10% 10%, rgba(155,89,255,0.04), transparent 10%), radial-gradient(circle at 90% 90%, rgba(255,45,149,0.03), transparent 12%);
 }
 
@@ -18,7 +18,7 @@
 	width: 100%;
 }
 
-/* Header centered at top */
+
 .mh-header {
 	width: 100%;
 	display: flex;
@@ -61,12 +61,12 @@
 	font-size: 0.95rem;
 }
 
-/* Ensure cards go below header with spacing */
+
 .cards-row {
 	margin-top: 18px;
 }
 
-/* Gothic decorative header underline */
+
 .mh-header::after {
 	content: '';
 	width: 220px;
@@ -77,7 +77,7 @@
 	box-shadow: 0 6px 18px rgba(155,89,255,0.06);
 }
 
-/* subtle decorative frame around the card area */
+
 .cards-row {
 	padding: 18px;
 	border-radius: 12px;
@@ -112,13 +112,13 @@
 	cursor: pointer;
 }
 
-/* Add card button (fixed bottom) */
+
 .add-card-btn {
 	display: inline-block;
-	margin: 28px auto 0 auto; /* aparecer al final del contenido, centrado */
+	margin: 28px auto 0 auto; 
 	background: linear-gradient(90deg, var(--mh-accent), var(--mh-accent-2));
 	color: white;
-	border: 2px solid rgba(255,255,255,0.12); /* contorno visible */
+	border: 2px solid rgba(255,255,255,0.12); 
 	padding: 12px 18px;
 	border-radius: 999px;
 	font-weight: 600;
@@ -126,7 +126,7 @@
 	cursor: pointer;
 }
 
-/* Form inside modal */
+
 .card-form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -155,10 +155,10 @@
 
 .card-form .form-row:nth-child(7),
 .card-form .form-row:nth-child(6) {
-	grid-column: 1 / -1; /* make species and image span full width */
+	grid-column: 1 / -1; 
 }
 
-/* View modal for a single card (image large + attrs) */
+
 .view-modal {
 	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
 	border-radius: 12px;
@@ -173,14 +173,15 @@
 
 .view-content {
 	display: grid;
-	grid-template-columns: 360px 1fr; /* imagen fija a la izquierda, attrs a la derecha */
+	grid-template-columns: 360px 1fr; 
 	gap: 18px;
 	align-items: start;
 }
 
+/* imagen mediana */
 .view-image img {
-	width: 360px; /* medida específica para imagen mediana */
-	height: 480px; /* altura fija para mantener consistencia */
+	width: 360px; 
+	height: 480px;
 	border-radius: 8px;
 	display: block;
 	object-fit: cover;
@@ -190,16 +191,15 @@
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between; /* push button to bottom */
+	justify-content: space-between; 
 	gap: 6px;
-	min-height: 480px; /* align height with image column on wide screens */
+	min-height: 480px; 
 }
 
 .view-attrs h3 {
 	margin-top: 0;
 }
 
-/* Atributos ordenados con iconos (reusar los iconos anteriores) */
 .view-attrs .attr {
 	display: flex;
 	align-items: center;
@@ -226,9 +226,8 @@
 	color: rgba(255,255,255,0.95);
 }
 
-/* Close button specifically for the view modal: contorno y cerca de la imagen */
+
 .view-close-btn {
-	/* placed inside attributes column and pushed to bottom by flex */
 	position: static;
 	margin-top: 12px;
 	align-self: flex-start;
@@ -249,7 +248,6 @@
 	outline: 3px solid rgba(255,255,255,0.08);
 }
 
-/* Responsive: on small screens stack image on top and keep close button top-right */
 @media (max-width: 780px) {
 	.view-content { grid-template-columns: 1fr; }
 	.view-image img { width: 100%; height: auto; }
@@ -257,7 +255,6 @@
 	.view-attrs { padding-top: 6px; min-height: auto; }
 }
 
-/* Focus/hover for add button */
 .add-card-btn:hover {
 	box-shadow: 0 10px 36px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.06);
 }
