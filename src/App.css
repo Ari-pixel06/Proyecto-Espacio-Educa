@@ -12,7 +12,6 @@
 	padding: 16px;
 }
 
-/* Responsive tweaks */
 @media (max-width: 640px) {
 	.cards-row {
 		flex-direction: column;

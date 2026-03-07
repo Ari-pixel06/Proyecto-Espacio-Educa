@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-	--mh-bg1: #0b0226; /* deep indigo */
-	--mh-bg2: #2b0b2e; /* dark plum */
-	--mh-accent: #ff2d95; /* neon pink */
-	--mh-accent-2: #9b59ff; /* purple */
-	--mh-text: #f7f7fb; /* almost white */
+	--mh-bg1: #0b0226; 
+	--mh-bg2: #2b0b2e; 
+	--mh-accent: #ff2d95; 
+	--mh-accent-2: #9b59ff;
+	--mh-text: #f7f7fb; 
 	--mh-muted: #c9bfe3;
 	--mh-card-bg: rgba(255,255,255,0.02);
 	--mh-card-border: linear-gradient(135deg,var(--mh-accent),var(--mh-accent-2));
