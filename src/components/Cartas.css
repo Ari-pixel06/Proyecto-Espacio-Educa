@@ -11,13 +11,13 @@ body {
 
 
 .card {
-	background: rgba(12,12,14,0.86); /* panel oscuro y opaco para buen contraste */
+	background: rgba(12,12,14,0.86); 
 	backdrop-filter: blur(6px);
 	-webkit-backdrop-filter: blur(6px);
 	border-radius: 14px;
 	padding: 14px;
-	width: 280px; /* un poco más pequeño */
-	height: 440px; /* reducir altura adicionalmente */
+	width: 280px; 
+	height: 440px; 
 	box-shadow: 0 10px 26px rgba(0,0,0,0.68), 0 4px 14px rgba(0,0,0,0.42), 0 0 22px rgba(255,255,255,0.08);
 	cursor: pointer;
 	transition: transform 0.14s ease, box-shadow 0.14s ease;
