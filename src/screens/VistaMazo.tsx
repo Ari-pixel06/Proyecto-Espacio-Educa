@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carta from '../components/Cartas';
 import './VistaMazo.css';
 
@@ -14,39 +14,42 @@ type CardData = {
 };
 
 function VistaMazo() {
-  const [cards, setCards] = useState<CardData[]>([
-    {
-      apellido: 'de Nile',
-      edad: 5842,
-      nombre: 'Cleo',
-      padres: 'La momia',
-      habilidad: 'Magia Egipcia',
-      imagen:
-        'https://th.bing.com/th/id/R.7cf6b8d21ef735c84d5685a8c6a7b63e?rik=T9bgC%2f8e%2fTCWFA&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f28800000%2fCleo-De-Nile-monster-high-28820550-704-1082.jpg&ehk=f%2bmqWFqARVXyEkiKlwt4%2fUODiCe0Hto7ergqJ66F7XA%3d&risl=&pid=ImgRaw&r=0',
-      especie: 'Momia',
-    },
-    {
-      apellido: 'Bominable',
-      edad: 16,
-      nombre: 'Abbey',
-      padres: 'El Yeti',
-      habilidad: 'Control del hielo',
-      imagen:
-        'https://tse3.mm.bing.net/th/id/OIP.eJisJUinMbmHTK3EQjMFegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-      especie: 'Yeti',
-    },
-    {
-      apellido: '',
-      edad: 16,
-      nombre: 'Operetta',
-      padres: 'Fantasma de la Ópera',
-      habilidad: 'Canto hipnótico',
-      imagen:
-        'https://w0.peakpx.com/wallpaper/163/754/HD-wallpaper-monster-high-monster-high-scaritage-operetta-doll-anime.jpg',
-      especie: 'Fantasma',
-      className: 'operetta',
-    },
-  ]);
+  const [cards, setCards] = useState<CardData[]>(() => {
+    const saved = localStorage.getItem('monsterHighCards');
+    return saved ? JSON.parse(saved) : [
+      {
+        apellido: 'de Nile',
+        edad: 5842,
+        nombre: 'Cleo',
+        padres: 'La momia',
+        habilidad: 'Magia Egipcia',
+        imagen:
+          'https://th.bing.com/th/id/R.7cf6b8d21ef735c84d5685a8c6a7b63e?rik=T9bgC%2f8e%2fTCWFA&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f28800000%2fCleo-De-Nile-monster-high-28820550-704-1082.jpg&ehk=f%2bmqWFqARVXyEkiKlwt4%2fUODiCe0Hto7ergqJ66F7XA%3d&risl=&pid=ImgRaw&r=0',
+        especie: 'Momia',
+      },
+      {
+        apellido: 'Bominable',
+        edad: 16,
+        nombre: 'Abbey',
+        padres: 'El Yeti',
+        habilidad: 'Control del hielo',
+        imagen:
+          'https://tse3.mm.bing.net/th/id/OIP.eJisJUinMbmHTK3EQjMFegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+        especie: 'Yeti',
+      },
+      {
+        apellido: '',
+        edad: 16,
+        nombre: 'Operetta',
+        padres: 'Fantasma de la Ópera',
+        habilidad: 'Canto hipnótico',
+        imagen:
+          'https://w0.peakpx.com/wallpaper/163/754/HD-wallpaper-monster-high-monster-high-scaritage-operetta-doll-anime.jpg',
+        especie: 'Fantasma',
+        className: 'operetta',
+      },
+    ];
+  });
 
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({
@@ -91,6 +94,10 @@ function VistaMazo() {
   }
 
   const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem('monsterHighCards', JSON.stringify(cards));
+  }, [cards]);
 
   function openView(card: CardData) {
     setSelectedCard(card);

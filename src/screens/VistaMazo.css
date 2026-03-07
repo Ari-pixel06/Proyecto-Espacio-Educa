@@ -11,10 +11,10 @@
 }
 
 .cards-row {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
-	align-items: flex-start;
-	justify-content: center; /* centrar las cartas horizontalmente */
+	justify-items: center;
 	width: 100%;
 }
 

@@ -40,36 +40,34 @@ body {
 	position: relative;
 	z-index: 1;
 	color: #ffffff;
-	margin: 4px 0; /* reducir separación vertical general */
+	margin: 4px 0; 
 }
 
 .card img {
 	width: 100%;
-	height: 230px; /* imagen más corta para la carta reducida */
+	height: 230px; 
 	display: block;
 	margin: 8px 0;
 	border-radius: 10px;
 	z-index: 1;
-	object-fit: cover; /* mantener imagen recortada de forma consistente */
+	object-fit: cover; 
 }
 
 .card-body {
 	z-index: 1;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start; /* quitar espacio extra entre los bloques de atributos */
-	gap: 4px; /* espacio consistente entre los bloques */
-	flex: 1; /* take remaining vertical space */
+	justify-content: flex-start; 
+	gap: 4px; 
+	flex: 1; 
 }
 
 .card h3 {
-	font-size: 1.25rem; /* ajustar título al nuevo ancho */
+	font-size: 1.25rem; 
 	margin: 4px 0;
 	font-weight: 600;
 }
 
-/* Badge que muestra la habilidad con estrella (eliminada del JSX) */
-/* Si quieres restaurarla, react-icons/ badge pueden volver a añadirse aquí */
 
 .card:hover {
 	transform: translateY(-8px) scale(1.02);
@@ -79,19 +77,17 @@ body {
 }
 
 .card-large {
-	width: 600px; /* adjusted modal / featured card */
+	width: 600px; 
 	height: 820px;
 	padding: 20px;
 }
 
-/* Gothic decorative frame for cards */
 .card {
 	background-clip: padding-box;
 	border-radius: 14px;
 }
 
 .card::after {
-	/* ornate frame edge using conic gradient as border image effect */
 	content: '';
 	position: absolute;
 	inset: 6px;
@@ -103,7 +99,7 @@ body {
 	mix-blend-mode: multiply;
 }
 
-/* decorative corner flourishes */
+
 .card::before {
 	content: '';
 	position: absolute;
@@ -157,9 +153,9 @@ body {
 	color: rgba(255,255,255,0.95);
 }
 
-/* Operetta specific image adjustment: shift crop upward and trim bottom */
+
 .card.operetta img {
-	object-position: 50% 12%; /* center horizontally, move focus toward top */
+	object-position: 50% 12%; 
 }
 
 .card .accent {
