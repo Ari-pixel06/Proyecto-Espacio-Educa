@@ -5,7 +5,7 @@ import './VistaMazo.css';
 function CardDetail() {
   const { cardId } = useParams();
   const navigate = useNavigate();
-  const { cards } = useCards();
+  const { cards, deleteCard } = useCards();
 
   const index = cardId ? Number(cardId) : NaN;
   const card = Number.isFinite(index) ? cards[index] : undefined;
@@ -64,9 +64,14 @@ function CardDetail() {
                   Habilidad: <span>{card.habilidad}</span>
                 </p>
               </div>
-              <button className="close-btn view-close-btn" onClick={() => navigate('/')} aria-label="Cerrar">
-                Cerrar
-              </button>
+              <div className="view-actions">
+                <button className="delete-btn" onClick={() => { deleteCard(index); navigate('/'); }} aria-label="Borrar carta">
+                  Borrar
+                </button>
+                <button className="close-btn view-close-btn" onClick={() => navigate('/')} aria-label="Cerrar">
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>

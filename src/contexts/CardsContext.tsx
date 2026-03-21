@@ -15,6 +15,7 @@ type CardsContextValue = {
   cards: CardData[];
   addCard: (card: CardData) => void;
   updateCards: (cards: CardData[]) => void;
+  deleteCard: (index: number) => void;
 };
 
 const CardsContext = createContext<CardsContextValue | undefined>(undefined);
@@ -68,6 +69,7 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
       cards,
       addCard: (card: CardData) => setCards((prev) => [card, ...prev]),
       updateCards: setCards,
+      deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
     }),
     [cards],
   );
