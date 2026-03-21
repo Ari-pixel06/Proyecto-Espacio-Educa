@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useCards, type CardData } from '../contexts/CardsContext';
 import './VistaMazo.css';
 
 function AddCard() {
-  const { addCard } = useCards();
+  const { addCard, updateCard, cards } = useCards();
   const navigate = useNavigate();
+  const { cardId } = useParams();
+  const isEditing = !!cardId;
+  const editIndex = cardId ? Number(cardId) : -1;
 
   const [form, setForm] = useState({
     nombre: '',
@@ -17,6 +20,21 @@ function AddCard() {
     imagen: '',
   });
 
+  useEffect(() => {
+    if (isEditing && editIndex >= 0 && cards[editIndex]) {
+      const card = cards[editIndex];
+      setForm({
+        nombre: card.nombre || '',
+        apellido: card.apellido || '',
+        edad: String(card.edad) || '',
+        padres: card.padres || '',
+        habilidad: card.habilidad || '',
+        especie: card.especie || '',
+        imagen: card.imagen || '',
+      });
+    }
+  }, [isEditing, editIndex, cards]);
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
@@ -24,7 +42,7 @@ function AddCard() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const newCard: CardData = {
+    const card: CardData = {
       nombre: form.nombre || 'Sin nombre',
       apellido: form.apellido,
       edad: Number(form.edad) || 0,
@@ -36,7 +54,11 @@ function AddCard() {
         'https://via.placeholder.com/400x600.png?text=Sin+imagen',
     };
 
-    addCard(newCard);
+    if (isEditing) {
+      updateCard(editIndex, card);
+    } else {
+      addCard(card);
+    }
     navigate('/');
   }
 
@@ -47,7 +69,7 @@ function AddCard() {
           <div className="mh-logo-img" aria-hidden>
             💀
           </div>
-          <h1 className="mh-title">Añadir carta</h1>
+          <h1 className="mh-title">{isEditing ? 'Editar carta' : 'Añadir carta'}</h1>
         </div>
       </header>
 

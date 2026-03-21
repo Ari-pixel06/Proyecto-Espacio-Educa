@@ -68,6 +68,9 @@ function CardDetail() {
                 <button className="delete-btn" onClick={() => { deleteCard(index); navigate('/'); }} aria-label="Borrar carta">
                   Borrar
                 </button>
+                <button className="edit-btn" onClick={() => navigate(`/edit/${index}`)} aria-label="Editar carta">
+                  Editar
+                </button>
                 <button className="close-btn view-close-btn" onClick={() => navigate('/')} aria-label="Cerrar">
                   Cerrar
                 </button>

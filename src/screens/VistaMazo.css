@@ -123,6 +123,17 @@
 	cursor: pointer;
 }
 
+.edit-btn {
+	margin-top: 12px;
+	margin-right: 12px;
+	background: #007bff;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
 .view-actions {
 	display: flex;
 	justify-content: flex-end;

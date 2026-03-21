@@ -1,4 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import axios from 'axios';
+import type { AxiosInstance } from 'axios';
+import { API_CONFIG } from '../config';
 
 export type CardData = {
   apellido?: string;
@@ -16,6 +19,8 @@ type CardsContextValue = {
   addCard: (card: CardData) => void;
   updateCards: (cards: CardData[]) => void;
   deleteCard: (index: number) => void;
+  updateCard: (index: number, card: CardData) => void;
+  api: AxiosInstance;
 };
 
 const CardsContext = createContext<CardsContextValue | undefined>(undefined);
@@ -64,12 +69,23 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('monsterHighCards', JSON.stringify(cards));
   }, [cards]);
 
+  // Configurar axios
+  const api = axios.create({
+    baseURL: API_CONFIG.baseURL,
+    headers: {
+      'Authorization': `Bearer ${API_CONFIG.apiKey}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
   const value = useMemo(
     () => ({
       cards,
       addCard: (card: CardData) => setCards((prev) => [card, ...prev]),
       updateCards: setCards,
       deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
+      updateCard: (index: number, card: CardData) => setCards((prev) => prev.map((c, i) => i === index ? card : c)),
+      api, // Exponer la instancia de axios configurada
     }),
     [cards],
   );
