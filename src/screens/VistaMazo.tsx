@@ -18,8 +18,11 @@ function VistaMazo() {
         </div>
       </header>
 
-      <div className="cards-row">
-        {cards.map((c, i) => (
+      <button className="add-card-btn" onClick={() => navigate('/add')} aria-label="Agregar carta">
+        + Añadir carta
+      </button>
+
+      <div className="cards-row">        {cards.map((c, i) => (
           <Carta
             key={i}
             apellido={c.apellido || ''}
@@ -32,12 +35,7 @@ function VistaMazo() {
             className={c.className}
             onClick={() => navigate(`/cards/${i}`)}
           />
-        ))}
-      </div>
-
-      <button className="add-card-btn" onClick={() => navigate('/add')} aria-label="Agregar carta">
-        + Añadir carta
-      </button>
+        ))}    </div>
     </div>
   );
 }
