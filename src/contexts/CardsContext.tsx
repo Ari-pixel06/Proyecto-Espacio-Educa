@@ -85,7 +85,7 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
       updateCards: setCards,
       deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
       updateCard: (index: number, card: CardData) => setCards((prev) => prev.map((c, i) => i === index ? card : c)),
-      api, // Exponer la instancia de axios configurada
+      api,
     }),
     [cards],
   );
