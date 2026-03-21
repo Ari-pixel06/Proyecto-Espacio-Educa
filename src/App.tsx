@@ -11,7 +11,6 @@ function App() {
       <Routes>
         <Route path="/" element={<VistaMazo />} />
         <Route path="/add" element={<AddCard />} />
-        <Route path="/edit/:cardId" element={<AddCard />} />
         <Route path="/cards/:cardId" element={<CardDetail />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
