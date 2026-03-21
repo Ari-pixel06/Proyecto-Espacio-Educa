@@ -153,7 +153,7 @@
 
 .add-card-btn {
 	display: inline-block;
-	margin: 28px auto 0 auto; 
+	margin: -6px auto 0 auto; 
 	background: linear-gradient(90deg, var(--mh-accent), var(--mh-accent-2));
 	color: white;
 	border: 2px solid rgba(255,255,255,0.12); 
