@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { API_CONFIG } from '../config';
@@ -59,6 +59,14 @@ const defaultCards: CardData[] = [
   },
 ];
 
+const api = axios.create({
+  baseURL: API_CONFIG.baseURL,
+  headers: {
+    'Authorization': `Bearer ${API_CONFIG.apiKey}`,
+    'Content-Type': 'application/json',
+  },
+});
+
 export function CardsProvider({ children }: { children: React.ReactNode }) {
   const [cards, setCards] = useState<CardData[]>(() => {
     const saved = localStorage.getItem('monsterHighCards');
@@ -69,26 +77,14 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('monsterHighCards', JSON.stringify(cards));
   }, [cards]);
 
-  // Configurar axios
-  const api = axios.create({
-    baseURL: API_CONFIG.baseURL,
-    headers: {
-      'Authorization': `Bearer ${API_CONFIG.apiKey}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const value = useMemo(
-    () => ({
-      cards,
-      addCard: (card: CardData) => setCards((prev) => [card, ...prev]),
-      updateCards: setCards,
-      deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
-      updateCard: (index: number, card: CardData) => setCards((prev) => prev.map((c, i) => i === index ? card : c)),
-      api,
-    }),
-    [cards],
-  );
+  const value = {
+    cards,
+    addCard: (card: CardData) => setCards((prev) => [card, ...prev]),
+    updateCards: setCards,
+    deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
+    updateCard: (index: number, card: CardData) => setCards((prev) => prev.map((c, i) => i === index ? card : c)),
+    api,
+  };
 
   return <CardsContext.Provider value={value}>{children}</CardsContext.Provider>;
 }
