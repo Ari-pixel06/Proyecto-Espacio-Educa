@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
-import { API_CONFIG } from '../config';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.educapi.com/v2';
+const API_KEY = import.meta.env.VITE_API_KEY || 'Aria278720EZ';
 
 export type CardData = {
   apellido?: string;
@@ -59,10 +61,11 @@ const defaultCards: CardData[] = [
   },
 ];
 
+// Configurar instancia de axios fuera del componente para que sea estable sin useMemo
 const api = axios.create({
-  baseURL: API_CONFIG.baseURL,
+  baseURL: API_BASE_URL,
   headers: {
-    'Authorization': `Bearer ${API_CONFIG.apiKey}`,
+    'Authorization': `Bearer ${API_KEY}`,
     'Content-Type': 'application/json',
   },
 });
