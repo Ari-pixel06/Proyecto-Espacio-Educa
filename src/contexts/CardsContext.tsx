@@ -4,8 +4,10 @@ import type { AxiosInstance } from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.educapi.com/v2';
 const API_KEY = import.meta.env.VITE_API_KEY || 'Aria278720EZ';
+const CARDS_ENDPOINT = '/cards';
 
 export type CardData = {
+  id?: string;
   apellido?: string;
   nombre: string;
   edad: number;
@@ -18,10 +20,10 @@ export type CardData = {
 
 type CardsContextValue = {
   cards: CardData[];
-  addCard: (card: CardData) => void;
+  addCard: (card: CardData) => Promise<void>;
   updateCards: (cards: CardData[]) => void;
-  deleteCard: (index: number) => void;
-  updateCard: (index: number, card: CardData) => void;
+  deleteCard: (index: number) => Promise<void>;
+  updateCard: (index: number, card: CardData) => Promise<void>;
   api: AxiosInstance;
 };
 
@@ -61,14 +63,44 @@ const defaultCards: CardData[] = [
   },
 ];
 
-// Configurar instancia de axios fuera del componente para que sea estable sin useMemo
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    'Authorization': `Bearer ${API_KEY}`,
+    Authorization: `${API_KEY}`,
     'Content-Type': 'application/json',
   },
 });
+
+function getRemoteCardsData(responseData: unknown): CardData[] {
+  if (Array.isArray(responseData)) {
+    return responseData as CardData[];
+  }
+
+  const maybeData = responseData as { data?: unknown };
+  if (Array.isArray(maybeData?.data)) {
+    return maybeData.data as CardData[];
+  }
+
+  return [];
+}
+
+function getRemoteCard(responseData: unknown): CardData | null {
+  if (!responseData || typeof responseData !== 'object') {
+    return null;
+  }
+
+  const candidate = responseData as CardData;
+  if (candidate.nombre || candidate.id || candidate.especie) {
+    return candidate;
+  }
+
+  const maybeData = responseData as { data?: unknown };
+  if (maybeData?.data && typeof maybeData.data === 'object') {
+    return maybeData.data as CardData;
+  }
+
+  return null;
+}
 
 export function CardsProvider({ children }: { children: React.ReactNode }) {
   const [cards, setCards] = useState<CardData[]>(() => {
@@ -77,15 +109,73 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    const loadCards = async () => {
+      try {
+        const response = await api.get(CARDS_ENDPOINT);
+        const remoteCards = getRemoteCardsData(response.data);
+        if (
+          Array.isArray(response.data) ||
+          (response.data && typeof response.data === 'object' && 'data' in response.data)
+        ) {
+          setCards(remoteCards);
+        }
+      } catch (error) {
+        console.error('Error cargando cartas remotas:', error);
+      }
+    };
+
+    void loadCards();
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem('monsterHighCards', JSON.stringify(cards));
   }, [cards]);
 
+  const addCard = async (card: CardData) => {
+    try {
+      const response = await api.post(CARDS_ENDPOINT, card);
+      const createdCard = getRemoteCard(response.data) || card;
+      setCards((prev) => [createdCard, ...prev]);
+    } catch (error) {
+      console.error('Error guardando carta remota:', error);
+      setCards((prev) => [card, ...prev]);
+    }
+  };
+
+  const updateCard = async (index: number, card: CardData) => {
+    setCards((prev) => prev.map((c, i) => (i === index ? card : c)));
+    const existingCard = cards[index];
+
+    if (existingCard?.id) {
+      try {
+        const response = await api.put(`${CARDS_ENDPOINT}/${existingCard.id}`, card);
+        const updated = getRemoteCard(response.data) || card;
+        setCards((prev) => prev.map((c, i) => (i === index ? updated : c)));
+      } catch (error) {
+        console.error('Error actualizando carta remota:', error);
+      }
+    }
+  };
+
+  const deleteCard = async (index: number) => {
+    const existingCard = cards[index];
+    setCards((prev) => prev.filter((_, i) => i !== index));
+
+    if (existingCard?.id) {
+      try {
+        await api.delete(`${CARDS_ENDPOINT}/${existingCard.id}`);
+      } catch (error) {
+        console.error('Error borrando carta remota:', error);
+      }
+    }
+  };
+
   const value = {
     cards,
-    addCard: (card: CardData) => setCards((prev) => [card, ...prev]),
+    addCard,
     updateCards: setCards,
-    deleteCard: (index: number) => setCards((prev) => prev.filter((_, i) => i !== index)),
-    updateCard: (index: number, card: CardData) => setCards((prev) => prev.map((c, i) => i === index ? card : c)),
+    deleteCard,
+    updateCard,
     api,
   };
 
