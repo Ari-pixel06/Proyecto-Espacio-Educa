@@ -5,7 +5,6 @@ import type { AxiosInstance } from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.educapi.com/v2';
 const API_KEY = import.meta.env.VITE_API_KEY || 'Aria278720EZ';
 const CARDS_ENDPOINT = '/cards';
-
 export type CardData = {
   id?: string;
   apellido?: string;
@@ -25,6 +24,11 @@ type CardsContextValue = {
   deleteCard: (index: number) => Promise<void>;
   updateCard: (index: number, card: CardData) => Promise<void>;
   api: AxiosInstance;
+  selectedIndices: number[];
+  toggleSelectCard: (index: number) => void;
+  isSelectionMode: boolean;
+  setIsSelectionMode: (value: boolean) => void;
+  clearSelection: () => void;
 };
 
 const CardsContext = createContext<CardsContextValue | undefined>(undefined);
@@ -108,6 +112,25 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
     return saved ? JSON.parse(saved) : defaultCards;
   });
 
+  const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
+
+  const toggleSelectCard = (index: number) => {
+    setSelectedIndices((prev) => {
+      if (prev.includes(index)) {
+        return prev.filter((i) => i !== index);
+      }
+      // Solo permitimos seleccionar hasta 2 cartas
+      if (prev.length < 2) {
+        return [...prev, index];
+      }
+      // Si ya hay 2, podríamos reemplazar la última o simplemente no hacer nada
+      return prev;
+    });
+  };
+
+  const clearSelection = () => setSelectedIndices([]);
+
   useEffect(() => {
     const loadCards = async () => {
       try {
@@ -177,6 +200,11 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
     deleteCard,
     updateCard,
     api,
+    selectedIndices,
+    toggleSelectCard,
+    isSelectionMode,
+    setIsSelectionMode,
+    clearSelection,
   };
 
   return <CardsContext.Provider value={value}>{children}</CardsContext.Provider>;

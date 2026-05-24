@@ -4,8 +4,25 @@ import { useCards } from '../contexts/CardsContext';
 import './VistaMazo.css';
 
 function VistaMazo() {
-  const { cards } = useCards();
+  const { cards, selectedIndices, toggleSelectCard, isSelectionMode, setIsSelectionMode, clearSelection } = useCards();
   const navigate = useNavigate();
+
+  const handleSelectionMode = () => {
+    if (isSelectionMode) {
+      setIsSelectionMode(false);
+      clearSelection();
+      return;
+    }
+
+    setIsSelectionMode(true);
+    clearSelection();
+    if (cards.length > 0) {
+      toggleSelectCard(0);
+    }
+    if (cards.length > 1) {
+      toggleSelectCard(1);
+    }
+  };
 
   return (
     <div className="vista-mazo-root">
@@ -18,11 +35,22 @@ function VistaMazo() {
         </div>
       </header>
 
-      <button className="add-card-btn" onClick={() => navigate('/add')} aria-label="Agregar carta">
-        + Añadir carta
-      </button>
+      <div className="action-row">
+        <button className="add-card-btn" onClick={() => navigate('/add')} aria-label="Agregar carta">
+          + Añadir carta
+        </button>
 
-      <div className="cards-row">        {cards.map((c, i) => (
+        <button
+          className="add-card-btn"
+          onClick={handleSelectionMode}
+          aria-label={isSelectionMode ? 'Cancelar selección' : 'Seleccionar cartas'}
+        >
+          {isSelectionMode ? 'Cancelar selección' : 'Seleccionar'}
+        </button>
+      </div>
+
+      <div className="cards-row">
+        {cards.map((c, i) => (
           <Carta
             key={i}
             apellido={c.apellido || ''}
@@ -33,9 +61,17 @@ function VistaMazo() {
             imagen={c.imagen || ''}
             especie={c.especie || ''}
             className={c.className}
-            onClick={() => navigate(`/cards/${i}`)}
+            selected={selectedIndices.includes(i)}
+            onClick={() => {
+              if (isSelectionMode) {
+                toggleSelectCard(i);
+                return;
+              }
+              navigate(`/cards/${i}`);
+            }}
           />
-        ))}    </div>
+        ))}
+      </div>
     </div>
   );
 }

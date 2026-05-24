@@ -18,6 +18,18 @@
 	width: 100%;
 }
 
+.action-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1cm;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 18px;
+}
+
+.action-row .add-card-btn {
+	margin: 0;
+}
 
 .mh-header {
 	width: 100%;
@@ -299,6 +311,32 @@
 
 .add-card-btn:focus {
 	outline: 3px solid rgba(255,255,255,0.08);
+}
+
+/* Contenedor para los botones de acción en la vista del mazo */
+.action-row {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: center;
+	margin-top: -6px;
+}
+
+.select-two-btn {
+	display: inline-block;
+	background: transparent;
+	color: white;
+	border: 2px solid rgba(255,255,255,0.12);
+	padding: 10px 16px;
+	border-radius: 999px;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.select-two-btn[aria-pressed="true"] {
+	background: rgba(255,215,0,0.08);
+	border-color: rgba(255,215,0,0.28);
+	color: #ffd700;
 }
 
 

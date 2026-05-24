@@ -11,6 +11,7 @@ type Props = {
     onClick?: () => void;
     className?: string;
     large?: boolean;
+    selected?: boolean;
 };
 
 function Cartas ({
@@ -24,10 +25,11 @@ function Cartas ({
     onClick,
     className,
     large = false,
+    selected = false,
 }: Props) {
     return (
         <div
-            className={["card", large ? "card-large" : "", className || ""].join(" ")}
+            className={["card", large ? "card-large" : "", className || "", selected ? "selected" : ""].join(" ")}
             onClick={onClick}
             role={onClick ? "button" : undefined}
             tabIndex={onClick ? 0 : undefined}
