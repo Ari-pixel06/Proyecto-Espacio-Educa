@@ -13,8 +13,9 @@ function AddCard() {
   const [form, setForm] = useState({
     nombre: '',
     apellido: '',
-    edad: '',
-    padres: '',
+    vida: '',
+    ataque: '',
+    defensa: '',
     habilidad: '',
     especie: '',
     imagen: '',
@@ -26,8 +27,9 @@ function AddCard() {
       setForm({
         nombre: card.nombre || '',
         apellido: card.apellido || '',
-        edad: String(card.edad) || '',
-        padres: card.padres || '',
+        vida: String(card.vida) || '',
+        ataque: String(card.ataque) || '',
+        defensa: String(card.defensa) || '',
         habilidad: card.habilidad || '',
         especie: card.especie || '',
         imagen: card.imagen || '',
@@ -45,8 +47,9 @@ function AddCard() {
     const card: CardData = {
       nombre: form.nombre || 'Sin nombre',
       apellido: form.apellido,
-      edad: Number(form.edad) || 0,
-      padres: form.padres,
+      vida: Number(form.vida) || 0,
+      ataque: Number(form.ataque) || 0,
+      defensa: Number(form.defensa) || 0,
       habilidad: form.habilidad,
       especie: form.especie,
       imagen:
@@ -86,12 +89,16 @@ function AddCard() {
               <input name="apellido" value={form.apellido} onChange={handleChange} />
             </div>
             <div className="form-row">
-              <label>Edad</label>
-              <input name="edad" value={form.edad} onChange={handleChange} type="number" min="0" />
+              <label>Vida</label>
+              <input name="vida" value={form.vida} onChange={handleChange} type="number" min="0" />
             </div>
             <div className="form-row">
-              <label>Padres</label>
-              <input name="padres" value={form.padres} onChange={handleChange} />
+              <label>Ataque</label>
+              <input name="ataque" value={form.ataque} onChange={handleChange} type="number" min="0" />
+            </div>
+            <div className="form-row">
+              <label>Defensa</label>
+              <input name="defensa" value={form.defensa} onChange={handleChange} type="number" min="0" />
             </div>
             <div className="form-row">
               <label>Habilidad</label>

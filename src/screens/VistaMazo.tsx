@@ -24,6 +24,16 @@ function VistaMazo() {
     }
   };
 
+  const handleBattle = () => {
+    if (selectedIndices.length < 2) {
+      // pedir selección mínima de 2 cartas
+      // eslint-disable-next-line no-alert
+      alert('Selecciona al menos 2 cartas para iniciar la batalla');
+      return;
+    }
+    navigate('/battle', { state: { selected: selectedIndices } });
+  };
+
   return (
     <div className="vista-mazo-root">
       <header className="mh-header">
@@ -47,6 +57,14 @@ function VistaMazo() {
         >
           {isSelectionMode ? 'Cancelar selección' : 'Seleccionar'}
         </button>
+        <button
+          className="add-card-btn"
+          onClick={handleBattle}
+          aria-label="Iniciar batalla"
+          style={{ marginLeft: 8 }}
+        >
+          Batalla
+        </button>
       </div>
 
       <div className="cards-row">
@@ -54,9 +72,10 @@ function VistaMazo() {
           <Carta
             key={i}
             apellido={c.apellido || ''}
-            edad={c.edad}
+            vida={c.vida}
+            ataque={c.ataque}
+            defensa={c.defensa}
             nombre={c.nombre}
-            padres={c.padres || ''}
             habilidad={c.habilidad || ''}
             imagen={c.imagen || ''}
             especie={c.especie || ''}

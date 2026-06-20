@@ -156,8 +156,9 @@ body {
 }
 
 .card p.attr.especie::before { content: "🐾"; }
-.card p.attr.edad::before { content: "🎂"; }
-.card p.attr.padres::before { content: "👪"; }
+.card p.attr.vida::before { content: "❤️"; }
+.card p.attr.ataque::before { content: "⚔"; }
+.card p.attr.defensa::before { content: "🛡"; }
 .card p.attr.habilidad::before { content: "⚡"; }
 
 .card p.attr span {

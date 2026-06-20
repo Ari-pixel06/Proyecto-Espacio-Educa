@@ -10,8 +10,9 @@ export type CardData = {
   id?: string;
   apellido?: string;
   nombre: string;
-  edad: number;
-  padres?: string;
+  vida: number;
+  ataque: number;
+  defensa: number;
   habilidad?: string;
   especie?: string;
   imagen?: string;
@@ -32,9 +33,10 @@ const CardsContext = createContext<CardsContextValue | undefined>(undefined);
 const defaultCards: CardData[] = [
   {
     apellido: 'de Nile',
-    edad: 5842,
+    vida: 100,
+    ataque: 85,
+    defensa: 70,
     nombre: 'Cleo',
-    padres: 'La momia',
     habilidad: 'Magia Egipcia',
     imagen:
       'https://th.bing.com/th/id/R.7cf6b8d21ef735c84d5685a8c6a7b63e?rik=T9bgC%2f8e%2fTCWFA&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f28800000%2fCleo-De-Nile-monster-high-28820550-704-1082.jpg&ehk=f%2bmqWFqARVXyEkiKlwt4%2fUODiCe0Hto7ergqJ66F7XA%3d&risl=&pid=ImgRaw&r=0',
@@ -42,9 +44,10 @@ const defaultCards: CardData[] = [
   },
   {
     apellido: 'Bominable',
-    edad: 16,
+    vida: 90,
+    ataque: 78,
+    defensa: 66,
     nombre: 'Abbey',
-    padres: 'El Yeti',
     habilidad: 'Control del hielo',
     imagen:
       'https://tse3.mm.bing.net/th/id/OIP.eJisJUinMbmHTK3EQjMFegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
@@ -52,9 +55,10 @@ const defaultCards: CardData[] = [
   },
   {
     apellido: '',
-    edad: 16,
+    vida: 92,
+    ataque: 74,
+    defensa: 68,
     nombre: 'Operetta',
-    padres: 'Fantasma de la Ópera',
     habilidad: 'Canto hipnótico',
     imagen:
       'https://w0.peakpx.com/wallpaper/163/754/HD-wallpaper-monster-high-monster-high-scaritage-operetta-doll-anime.jpg',

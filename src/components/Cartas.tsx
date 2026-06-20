@@ -3,8 +3,9 @@ import "./Cartas.css";
 type Props = {
     apellido: string;
     nombre: string;
-    edad: number;
-    padres: string;
+    vida: number;
+    ataque: number;
+    defensa: number;
     habilidad: string;
     especie: string;
     imagen: string;
@@ -16,8 +17,9 @@ type Props = {
 
 function Cartas ({
     apellido = "de Nile",
-    edad = 1,
-    padres = "Hola",
+    vida = 100,
+    ataque = 0,
+    defensa = 0,
     imagen,
     nombre = "pikachu",
     habilidad = "electricidad",
@@ -43,10 +45,11 @@ function Cartas ({
             <div className="card-body">
                 <div>
                     <p className="attr especie">Especie: <span>{especie}</span></p>
-                    <p className="attr edad">Edad: <span>{edad} años</span></p>
+                    <p className="attr vida">Vida: <span>{vida}</span></p>
                 </div>
                 <div>
-                    <p className="attr padres">Padres: <span>{padres}</span></p>
+                    <p className="attr ataque">Ataque: <span>{ataque}</span></p>
+                    <p className="attr defensa">Defensa: <span>{defensa}</span></p>
                     <p className="attr habilidad">Habilidad: <span>{habilidad}</span></p>
                 </div>
             </div>

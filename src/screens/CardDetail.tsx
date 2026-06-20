@@ -54,11 +54,14 @@ function CardDetail() {
                 <p className="attr especie">
                   Especie: <span>{card.especie}</span>
                 </p>
-                <p className="attr edad">
-                  Edad: <span>{card.edad} años</span>
+                <p className="attr vida">
+                  Vida: <span>{card.vida}</span>
                 </p>
-                <p className="attr padres">
-                  Padres: <span>{card.padres}</span>
+                <p className="attr ataque">
+                  Ataque: <span>{card.ataque}</span>
+                </p>
+                <p className="attr defensa">
+                  Defensa: <span>{card.defensa}</span>
                 </p>
                 <p className="attr habilidad">
                   Habilidad: <span>{card.habilidad}</span>
