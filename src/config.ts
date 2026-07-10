@@ -1,4 +1,4 @@
 export const API_CONFIG = {
-  baseURL: 'https://api.educapi.com/v2', // Asumiendo una URL base, ajusta si es diferente
+  baseURL: 'https://api.educapi.com/v2', 
   apiKey: 'Aria278720EZ',
 };

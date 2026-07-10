@@ -41,7 +41,6 @@ const defaultCards: CardData[] = [
     ataque: 85,
     defensa: 70,
     nombre: 'Cleo',
-    // padres was descriptive; replaced by stats
     habilidad: 'Magia Egipcia',
     imagen:
       'https://th.bing.com/th/id/R.7cf6b8d21ef735c84d5685a8c6a7b63e?rik=T9bgC%2f8e%2fTCWFA&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f28800000%2fCleo-De-Nile-monster-high-28820550-704-1082.jpg&ehk=f%2bmqWFqARVXyEkiKlwt4%2fUODiCe0Hto7ergqJ66F7XA%3d&risl=&pid=ImgRaw&r=0',
@@ -125,11 +124,11 @@ export function CardsProvider({ children }: { children: React.ReactNode }) {
       if (prev.includes(index)) {
         return prev.filter((i) => i !== index);
       }
-      // Solo permitimos seleccionar hasta 2 cartas
+      
       if (prev.length < 2) {
         return [...prev, index];
       }
-      // Si ya hay 2, podríamos reemplazar la última o simplemente no hacer nada
+    
       return prev;
     });
   };

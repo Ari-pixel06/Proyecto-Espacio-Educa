@@ -13,6 +13,7 @@ type Props = {
     className?: string;
     large?: boolean;
     selected?: boolean;
+    compact?: boolean;
 };
 
 function Cartas ({
@@ -28,31 +29,40 @@ function Cartas ({
     className,
     large = false,
     selected = false,
+    compact = false,
 }: Props) {
     return (
         <div
-            className={["card", large ? "card-large" : "", className || "", selected ? "selected" : ""].join(" ")}
+            className={["card", large ? "card-large" : "", compact ? "compact" : "", className || "", selected ? "selected" : ""].join(" ")}
             onClick={onClick}
             role={onClick ? "button" : undefined}
             tabIndex={onClick ? 0 : undefined}
             onKeyDown={(e) => { if (onClick && (e.key === 'Enter' || e.key === ' ')) onClick(); }}
         >
-            <h3>
-                {nombre} {apellido}
-            </h3>
-            
-            <img src={imagen} alt={nombre} />
-            <div className="card-body">
-                <div>
-                    <p className="attr especie">Especie: <span>{especie}</span></p>
-                    <p className="attr vida">Vida: <span>{vida}</span></p>
+            {compact ? (
+                <div className="compact-body">
+                    <img src={imagen} alt={nombre} />
+                    <h3 className="compact-name">{nombre} {apellido}</h3>
                 </div>
-                <div>
-                    <p className="attr ataque">Ataque: <span>{ataque}</span></p>
-                    <p className="attr defensa">Defensa: <span>{defensa}</span></p>
-                    <p className="attr habilidad">Habilidad: <span>{habilidad}</span></p>
-                </div>
-            </div>
+            ) : (
+                <>
+                    <h3>
+                        {nombre} {apellido}
+                    </h3>
+                    <img src={imagen} alt={nombre} />
+                    <div className="card-body">
+                        <div>
+                            <p className="attr especie">Especie: <span>{especie}</span></p>
+                            <p className="attr vida">Vida: <span>{vida}</span></p>
+                        </div>
+                        <div>
+                            <p className="attr ataque">Ataque: <span>{ataque}</span></p>
+                            <p className="attr defensa">Defensa: <span>{defensa}</span></p>
+                            <p className="attr habilidad">Habilidad: <span>{habilidad}</span></p>
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

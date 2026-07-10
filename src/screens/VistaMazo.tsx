@@ -26,8 +26,7 @@ function VistaMazo() {
 
   const handleBattle = () => {
     if (selectedIndices.length < 2) {
-      // pedir selección mínima de 2 cartas
-      // eslint-disable-next-line no-alert
+      
       alert('Selecciona al menos 2 cartas para iniciar la batalla');
       return;
     }
@@ -65,6 +64,7 @@ function VistaMazo() {
         >
           Batalla
         </button>
+
       </div>
 
       <div className="cards-row">
