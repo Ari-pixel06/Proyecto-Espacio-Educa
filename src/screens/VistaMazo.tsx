@@ -49,6 +49,10 @@ function VistaMazo() {
           + Añadir carta
         </button>
 
+        <button className="add-card-btn" onClick={() => navigate('/add-ai')} aria-label="Generar carta con IA">
+          Generar con IA
+        </button>
+
         <button
           className="add-card-btn"
           onClick={handleSelectionMode}
@@ -64,7 +68,6 @@ function VistaMazo() {
         >
           Batalla
         </button>
-
       </div>
 
       <div className="cards-row">

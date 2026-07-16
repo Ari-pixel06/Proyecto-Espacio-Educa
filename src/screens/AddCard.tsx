@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCards, type CardData } from '../contexts/CardsContext';
 import './VistaMazo.css';
 
 function AddCard() {
   const { addCard, updateCard, cards } = useCards();
   const navigate = useNavigate();
+  const location = useLocation();
   const { cardId } = useParams();
   const isEditing = !!cardId;
   const editIndex = cardId ? Number(cardId) : -1;
@@ -21,8 +21,6 @@ function AddCard() {
     especie: '',
     imagen: '',
   });
-  const [aiPrompt, setAiPrompt] = useState('');
-  const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     if (isEditing && editIndex >= 0 && cards[editIndex]) {
@@ -37,59 +35,25 @@ function AddCard() {
         especie: card.especie || '',
         imagen: card.imagen || '',
       });
+      return;
     }
-  }, [isEditing, editIndex, cards]);
+
+    const generatedCard = (location.state as { generatedCard?: CardData } | null)?.generatedCard;
+    if (generatedCard) {
+      setForm({
+        nombre: generatedCard.nombre || '',
+        apellido: generatedCard.apellido || '',
+        vida: String(generatedCard.vida) || '',
+        ataque: String(generatedCard.ataque) || '',
+        defensa: String(generatedCard.defensa) || '',
+        habilidad: generatedCard.habilidad || '',
+        especie: generatedCard.especie || '',
+        imagen: generatedCard.imagen || '',
+      });
+    }
+  }, [isEditing, editIndex, cards, location.state]);
 
   const clampStat = (value: number) => Math.min(300, Math.max(0, value));
-
-  async function handleGenerateWithAI() {
-    setIsGenerating(true);
-
-    try {
-      const response = await axios.post(
-        'https://educapi-v2.onrender.com/ai/generate-card',
-        {
-          globalContext: 'Temática Monster High, ataque 0-300, defensa 0-300, vida 1-300.',
-          cardPrompt: aiPrompt || '',
-        },
-        {
-          headers: {
-            usersecretpasskey: 'Aria278720EZ',
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const aiCard = response.data as Record<string, unknown>;
-      const mappedCard = {
-        nombre: String(aiCard.name || aiCard.nombre || 'Sin nombre'),
-        apellido: '',
-        vida: clampStat(Number(aiCard.lifePoints ?? aiCard.vida ?? 0)),
-        ataque: clampStat(Number(aiCard.attack ?? aiCard.ataque ?? 0)),
-        defensa: clampStat(Number(aiCard.defense ?? aiCard.defensa ?? 0)),
-        habilidad: String(aiCard.ability || aiCard.habilidad || ''),
-        especie: String(aiCard.species || aiCard.especie || ''),
-        imagen: String(aiCard.pictureUrl || aiCard.imagen || ''),
-      };
-
-      setForm((prev) => ({
-        ...prev,
-        nombre: mappedCard.nombre,
-        apellido: mappedCard.apellido,
-        vida: String(mappedCard.vida),
-        ataque: String(mappedCard.ataque),
-        defensa: String(mappedCard.defensa),
-        habilidad: mappedCard.habilidad,
-        especie: mappedCard.especie,
-        imagen: mappedCard.imagen,
-      }));
-    } catch (error) {
-      console.error('Error generando carta con IA:', error);
-      window.alert('No se pudo generar la carta con la IA. Intenta nuevamente.');
-    } finally {
-      setIsGenerating(false);
-    }
-  }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -173,20 +137,7 @@ function AddCard() {
               <label>Imagen (URL)</label>
               <input name="imagen" value={form.imagen} onChange={handleChange} />
             </div>
-            <div className="form-row">
-              <label>Prompt IA</label>
-              <textarea
-                value={aiPrompt}
-                onChange={(e) => setAiPrompt(e.target.value)}
-                rows={3}
-                placeholder="Crea tu propia carta Monstruosa"
-                style={{ minHeight: 72, resize: 'vertical' }}
-              />
-            </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
-              <button type="button" className="close-btn" onClick={handleGenerateWithAI} disabled={isGenerating}>
-                {isGenerating ? 'Generando...' : 'Generar con IA'}
-              </button>
               <button type="submit" className="close-btn">
                 Guardar
               </button>
